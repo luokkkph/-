@@ -1,0 +1,67 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#define random(x) (rand()%x)
+
+void main()
+{
+	int a,b,x,i=0,p=0,c,n=1;        //a是玩家输入，b是电脑输出随机值，x是随机值循环变量，i是玩家胜局变量，p是电脑胜局变量，c是每局循环变量，n为局数 
+	
+	printf("                      包剪揼大挑战\n");
+	for(c=1;;c++)        //无限循环 
+	{
+		
+
+
+    printf("             第%d局             \n",n);
+	printf("================================\n");       //玩家输入指定值   
+	
+	printf("请输入0为剪刀，1为石头，2为布：");
+	
+	scanf("%d",&a);
+
+	printf("================================\n");
+	
+	
+
+	    switch(a)         //将输入值以中文输出，若输入错误值则重新输入
+		{
+ 	    case 0:printf("   （你）剪刀VS");break;
+	    case 1:printf("   （你）石头VS");break;
+	    case 2:printf("   （你）布VS");break;
+	    default:printf("   输入错误，请重新输入\n");break;
+	  
+		}
+      
+                 srand((int)time(0));      //随机输出数据0、1、2，并以剪刀、石头、布输出
+				  if(a<=2&&a>=0)         //输入错误值则不执行随机输出 
+	  	         {       
+                 for(x=0;x<999;x++)    { b=random(3);}
+	 	                if(b==0)  printf("剪刀（电脑）\n");
+			       else if(b==1)  printf("石头（电脑）\n");
+			       else if(b==2)  printf("布（电脑）\n");
+                 
+                  n++;
+		          }
+                 else printf("   输入错误，请重新输入\n");
+
+		if((a==0&&b==0)||(a==1&&b==1)||(a==2&&b==2)) printf("\n          平局\n\n\n");         //比较输出值，判断胜负
+		else if((a==0&&b==1)||(a==1&&b==2)||(a==2&&b==0)) printf("\n          你输了\n\n"),p++;
+		else if((a==0&&b==2)||(a==1&&b==0)||(a==2&&b==1)) printf("\n          你赢了\n\n"),i++;
+		else printf("   输入错误，请重新输入\n");
+
+	    printf("     目前赢%d局，输%d局\n\n\n",i,p);    //输赢次数
+		
+
+		 if(p==3||i==3) break;       //分出胜负，结束循环
+	
+		 if(n==11)      //10局未分出胜负，此为彩蛋（局数可自行调整） 
+		 {
+			 printf("已经10局了，还没分出胜负，你是不舍得赢我吗？\n");break;  
+		 }    	
+	
+	}
+	printf("                     游戏结束\n");
+}
+
+
