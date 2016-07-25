@@ -1,0 +1,105 @@
+#include<stdio.h>
+#include <stdlib.h>
+#include<time.h>
+#define random(x) (rand()%x) 
+typedef struct player{
+	int grade;
+	char name[10];};
+player people[30];
+int number=0;
+void hello()
+{
+	printf("                 欢迎来到包剪揼大挑战");
+}
+int main()
+{
+	int q;
+	while(1)
+	{
+		printf("------包剪揼大挑战------\n");
+		printf("0:练习模式\n");
+	    printf("1:实战模式\n");
+      	printf("2:排行榜\n");
+		printf("3:游戏规则\n");
+		printf("------------------------\n");
+	
+		printf("请按数字键选择要执行的操作：");
+		scanf("%d",&q);
+		printf("\n");
+if(q==0)
+{
+	int a,b,x,c,n=1;
+     for(c=1;;c++)
+	{
+			printf("==============练习模式=============\n");
+			printf("请输入0为剪刀，1为石头，2为布：");
+			scanf("%d",&a);
+			printf("================================\n");
+  switch(a)         
+		{
+ 	    case 0:printf("   （你）剪刀VS");break;
+	    case 1:printf("   （你）石头VS");break;
+	    case 2:printf("   （你）布VS");break;
+	    default:printf("   输入错误，请重新输入\n");break;
+	  
+		}
+      
+                 srand((int)time(0));     
+				  if(a<=2&&a>=0)         
+	  	         {       
+                   b=random(3);
+	 	                if(b==0)  printf("剪刀（电脑）\n");
+			       else if(b==1)  printf("石头（电脑）\n");
+			       else if(b==2)  printf("布（电脑）\n");
+                
+      	if(a==b) printf("\n          平局\n\n\n");         
+		else if((a-b==1)||(a-b==-2)) printf("\n          你赢了\n\n");
+		else printf("\n          你输了\n\n");
+	}
+}
+}	
+else if(q==1)
+{ 
+	printf("请输入您的大名\n");
+
+	int a,b,x,i=0,p=0,c,n=1;
+	for(c=1;;c++)       
+	{
+		
+
+
+    printf("             第%d局             \n",n);
+	printf("================================\n");       
+	printf("请输入0为剪刀，1为石头，2为布：");
+	
+	scanf("%d",&a);
+
+	printf("================================\n");
+switch(a)         
+		{
+ 	    case 0:printf("   （你）剪刀VS");break;
+	    case 1:printf("   （你）石头VS");break;
+	    case 2:printf("   （你）布VS");break;
+	    default:printf("   输入错误，请重新输入\n");break;
+	  
+		}
+      
+                 srand((int)time(0));     
+				  if(a<=2&&a>=0)         
+	  	         {       
+                   b=random(3);
+	 	                if(b==0)  printf("剪刀（电脑）\n");
+			       else if(b==1)  printf("石头（电脑）\n");
+			       else if(b==2)  printf("布（电脑）\n");
+                n++;
+      	if(a==b) printf("\n          平局\n\n\n");         
+		else if((a-b==1)||(a-b==-2)) printf("\n          你赢了\n\n"),i++;
+		else printf("\n          你输了\n\n"),p++;
+		 printf("     目前赢%d局，输%d局\n\n\n",i,p);    
+
+		 if(p==3) break;
+	}		
+}
+}
+	}
+}
