@@ -1,0 +1,166 @@
+#include<stdio.h>
+#include <stdlib.h>
+#include<time.h>
+#define random(x) (rand()%x)
+
+typedef struct player{
+    int score;//积分
+    char name[10];}playerpeople;//名字
+/*******************************************/
+player people[30];//排行榜数据
+int number=0;//已在排行榜中的人数
+/*********************************************/
+void hello()
+{
+    printf("                 欢迎来到包剪揼大挑战");
+}
+/**************************************************/
+void print(int &q)
+{
+    printf("------包剪揼大挑战------\n");
+    printf("0:练习模式\n");
+    printf("1:实战模式\n");
+    printf("2:排行榜\n");
+    printf("3:游戏规则\n");
+    printf("------------------------\n");
+    printf("请按数字键选择要执行的操作：");
+    scanf("%d",&q);
+    printf("\n");
+    
+    
+}
+/**************************************************/
+void mode0(){
+    //
+    int a,b = 0,c;
+    printf("         练习模式");
+    for(c=1;;c++)
+    {
+        printf("================================\n");
+        printf("请输入0为剪刀，1为石头，2为布：");
+        scanf("%d",&a);
+         printf("按9返回菜单");
+		printf("================================\n");
+       
+		switch(a)
+        {
+            case 0:printf("   （你）剪刀VS");break;
+            case 1:printf("   （你）石头VS");break;
+            case 2:printf("   （你）布VS");break;
+            case 9:return;
+			default:printf("   输入错误，请重新输入\n");break;
+                
+        }
+        
+        srand((int)time(0));
+        if(a<=2&&a>=0)
+        {
+            b=random(3);
+            if(b==0)  printf("剪刀（电脑）\n");
+            else if(b==1)  printf("石头（电脑）\n");
+            else if(b==2)  printf("布（电脑）\n");
+            
+            if(a==b) printf("\n          平局\n\n\n");
+            else if((a-b==1)||(a-b==-2)) printf("\n          你赢了\n\n");
+            else printf("\n          你输了\n\n");
+        }
+        
+    }
+}
+/*************************************************/
+void mode1()
+{
+    int a,b,i=0,p=0,c,n=1;//n局数，i赢的局数，p输的局数
+    printf("请输入您的大名\n");
+    scanf("%s",people[number].name);//输入玩家姓名，储存在全局变量中
+    number++;
+    for(c=1;;c++)
+    {
+        
+        
+        
+        printf("             第%d局             \n",n);
+        printf("================================\n");
+        printf("请输入0为剪刀，1为石头，2为布：");
+        
+        scanf("%d",&a);
+        
+        printf("================================\n");
+        switch(a)
+        {
+            case 0:printf("   （你）剪刀VS");break;
+            case 1:printf("   （你）石头VS");break;
+            case 2:printf("   （你）布VS");break;
+            default:printf("   输入错误，请重新输入\n");break;
+                
+        }
+        srand((int)time(0));
+        if(a<=2&&a>=0)
+        {
+            b=random(3);
+            if(b==0)  printf("剪刀（电脑）\n");
+            else if(b==1)  printf("石头（电脑）\n");
+            else if(b==2)  printf("布（电脑）\n");
+            n++;
+            if(a==b) printf("\n          平局\n\n\n");
+            else if((a-b==1)||(a-b==-2)) printf("\n          你赢了\n\n"),i++;
+            else printf("\n          你输了\n\n"),p++;
+            printf("     目前赢%d局，输%d局\n\n\n",i,p);
+            if(p==3) break;
+        }
+    }
+    people[number-1].score=i;//记录分数
+//将当前玩家与排行榜中的玩家对比，从排行榜末端往前对比，若当前比排行榜中的分数高，则将玩家信息往前排一位，即交换次序，直至当前玩家的分数比排行榜中的玩家分数小，则停止比较.可认为数组中本来就是从大到小排列的。
+	for (i=1; i<number; i++) {
+       
+		if (people[number-i].score>people[number-i-1].score) {
+            player temp=people[number-1];
+            people[number-i]=people[number-i-1];
+            people[number-i-1]=temp;
+        }
+        else break;
+    }
+}
+/*************************************************/
+void mode2()
+{
+    printf("名次   名字   得分\n\n\n");
+    for (int i=0; i<number; i++) {
+        printf("第%d名  %s  %d\n",i+1,people[i].name,people[i].score);
+    }
+}
+/************************************************/
+void mode3()
+{
+	printf("本游戏包两种游戏方式 1：练习模式\n");
+	printf("2：实战模式\n");
+	printf("实战模式：玩家有3条命，与电脑包剪揼，赢的记1分，输的则失去一条命，直到玩家剩余0条命，则结束游戏\n");
+	printf("排行榜：记录每个玩家的积分，排名高低与积分多少有关，积分越多，排名越前。\n");
+	printf("练习模式：给予玩家和电脑进行不限制次数的包剪揼游戏，输赢均不计分\n");
+ 
+}
+int main()
+{
+    int fac(int n);
+	int q;
+    while(1)
+    {
+        print(q);
+        if(q==0)
+        {
+            mode0();
+        }
+        else if(q==1)
+        {
+            mode1();
+        }
+        else if(q==2)
+        {
+            mode2();
+        }
+    else if(q==3)
+        {
+            mode3();
+        }
+	}
+}
